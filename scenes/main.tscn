@@ -1,0 +1,285 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scenes/main.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Car1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Car2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Car3.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Car4.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Car5.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Tiles/tile1.tres" type="TileSet" id=7]
+[ext_resource path="res://Sprites/finish.png" type="Texture" id=8]
+[ext_resource path="res://scenes/spawn_c.gd" type="Script" id=9]
+[ext_resource path="res://scenes/Player.gd" type="Script" id=10]
+[ext_resource path="res://Sprites/player.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/player_death.png" type="Texture" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 6.31797, 6.87033 )
+
+[sub_resource type="Animation" id=2]
+
+length = 0.1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 11 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+
+length = 0.8
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 11 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+
+length = 0.6
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[node name="main" type="Node" index="0" groups=[
+"main",
+]]
+
+script = ExtResource( 1 )
+auto1 = ExtResource( 2 )
+auto2 = ExtResource( 3 )
+auto3 = ExtResource( 4 )
+auto4 = ExtResource( 5 )
+auto5 = ExtResource( 6 )
+
+[node name="Camera2D" type="Camera2D" parent="." index="0"]
+
+position = Vector2( 0.709778, -4.38907 )
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+
+[node name="nivel" type="Node" parent="." index="1" groups=[
+"nivel",
+]]
+
+[node name="TileMap" type="TileMap" parent="nivel" index="0"]
+
+mode = 0
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( -524304, 1, 0, -524303, 1, 0, -524302, 1, 0, -524301, 1, 0, -524300, 1, 0, -524299, 1, 0, -524298, 1, 0, -524297, 1, 0, -524296, 1, 0, -524295, 1, 0, -524294, 1, 0, -524293, 1, 0, -524292, 1, 0, -524291, 1, 0, -524290, 1, 0, -524289, 1, 0, -589824, 1, 0, -589823, 1, 0, -589822, 1, 0, -589821, 1, 0, -589820, 1, 0, -589819, 1, 0, -589818, 1, 0, -589817, 1, 0, -589816, 1, 0, -589815, 1, 0, -589814, 1, 0, -589813, 1, 0, -589812, 1, 0, -589811, 1, 0, -589810, 1, 0, -589809, 1, 0, -458768, 1, 0, -458767, 1, 0, -458766, 1, 0, -458765, 1, 0, -458764, 1, 0, -458763, 1, 0, -458762, 1, 0, -458761, 1, 0, -458760, 1, 0, -458759, 1, 0, -458758, 1, 0, -458757, 1, 0, -458756, 1, 0, -458755, 1, 0, -458754, 1, 0, -458753, 1, 0, -524288, 1, 0, -524287, 1, 0, -524286, 1, 0, -524285, 1, 0, -524284, 1, 0, -524283, 1, 0, -524282, 1, 0, -524281, 1, 0, -524280, 1, 0, -524279, 1, 0, -524278, 1, 0, -524277, 1, 0, -524276, 1, 0, -524275, 1, 0, -524274, 1, 0, -524273, 1, 0, -393232, 1, 0, -393231, 1, 0, -393230, 1, 0, -393229, 1, 0, -393228, 1, 0, -393227, 1, 0, -393226, 1, 0, -393225, 1, 0, -393224, 1, 0, -393223, 1, 0, -393222, 1, 0, -393221, 1, 0, -393220, 1, 0, -393219, 1, 0, -393218, 1, 0, -393217, 1, 0, -458752, 1, 0, -458751, 1, 0, -458750, 1, 0, -458749, 1, 0, -458748, 1, 0, -458747, 1, 0, -458746, 1, 0, -458745, 1, 0, -458744, 1, 0, -458743, 1, 0, -458742, 1, 0, -458741, 1, 0, -458740, 1, 0, -458739, 1, 0, -458738, 1, 0, -458737, 1, 0, -327696, 1, 0, -327695, 1, 0, -327694, 1, 0, -327693, 1, 0, -327692, 1, 0, -327691, 1, 0, -327690, 1, 0, -327689, 1, 0, -327688, 1, 0, -327687, 1, 0, -327686, 1, 0, -327685, 1, 0, -327684, 1, 0, -327683, 1, 0, -327682, 1, 0, -327681, 1, 0, -393216, 1, 0, -393215, 1, 0, -393214, 1, 0, -393213, 1, 0, -393212, 1, 0, -393211, 1, 0, -393210, 1, 0, -393209, 1, 0, -393208, 1, 0, -393207, 1, 0, -393206, 1, 0, -393205, 1, 0, -393204, 1, 0, -393203, 1, 0, -393202, 1, 0, -393201, 1, 0, -262160, 1, 0, -262159, 1, 0, -262158, 1, 0, -262157, 1, 0, -262156, 1, 0, -262155, 1, 0, -262154, 1, 0, -262153, 1, 0, -262152, 1, 0, -262151, 1, 0, -262150, 1, 0, -262149, 1, 0, -262148, 1, 0, -262147, 1, 0, -262146, 1, 0, -262145, 1, 0, -327680, 1, 0, -327679, 1, 0, -327678, 1, 0, -327677, 1, 0, -327676, 1, 0, -327675, 1, 0, -327674, 1, 0, -327673, 1, 0, -327672, 1, 0, -327671, 1, 0, -327670, 1, 0, -327669, 1, 0, -327668, 1, 0, -327667, 1, 0, -327666, 1, 0, -327665, 1, 0, -196624, 1, 0, -196623, 1, 0, -196622, 1, 0, -196621, 1, 0, -196620, 1, 0, -196619, 1, 0, -196618, 1, 0, -196617, 1, 0, -196616, 1, 0, -196615, 1, 0, -196614, 1, 0, -196613, 1, 0, -196612, 1, 0, -196611, 1, 0, -196610, 1, 0, -196609, 1, 0, -262144, 1, 0, -262143, 1, 0, -262142, 1, 0, -262141, 1, 0, -262140, 1, 0, -262139, 1, 0, -262138, 1, 0, -262137, 1, 0, -262136, 1, 0, -262135, 1, 0, -262134, 1, 0, -262133, 1, 0, -262132, 1, 0, -262131, 1, 0, -262130, 1, 0, -262129, 1, 0, -131088, 1, 0, -131087, 1, 0, -131086, 1, 0, -131085, 1, 0, -131084, 1, 0, -131083, 1, 0, -131082, 1, 0, -131081, 1, 0, -131080, 1, 0, -131079, 1, 0, -131078, 1, 0, -131077, 1, 0, -131076, 1, 0, -131075, 1, 0, -131074, 1, 0, -131073, 1, 0, -196608, 1, 0, -196607, 1, 0, -196606, 1, 0, -196605, 1, 0, -196604, 1, 0, -196603, 1, 0, -196602, 1, 0, -196601, 1, 0, -196600, 1, 0, -196599, 1, 0, -196598, 1, 0, -196597, 1, 0, -196596, 1, 0, -196595, 1, 0, -196594, 1, 0, -196593, 1, 0, -65552, 1, 0, -65551, 1, 0, -65550, 1, 0, -65549, 1, 0, -65548, 1, 0, -65547, 1, 0, -65546, 1, 0, -65545, 1, 0, -65544, 1, 0, -65543, 1, 0, -65542, 1, 0, -65541, 1, 0, -65540, 1, 0, -65539, 1, 0, -65538, 1, 0, -65537, 1, 0, -131072, 1, 0, -131071, 1, 0, -131070, 1, 0, -131069, 1, 0, -131068, 1, 0, -131067, 1, 0, -131066, 1, 0, -131065, 1, 0, -131064, 1, 0, -131063, 1, 0, -131062, 1, 0, -131061, 1, 0, -131060, 1, 0, -131059, 1, 0, -131058, 1, 0, -131057, 1, 0, -16, 1, 0, -15, 1, 0, -14, 1, 0, -13, 1, 0, -12, 1, 0, -11, 1, 0, -10, 1, 0, -9, 1, 0, -8, 1, 0, -7, 1, 0, -6, 1, 0, -5, 1, 0, -4, 1, 0, -3, 1, 0, -2, 1, 0, -1, 1, 0, -65536, 1, 0, -65535, 1, 0, -65534, 1, 0, -65533, 1, 0, -65532, 1, 0, -65531, 1, 0, -65530, 1, 0, -65529, 1, 0, -65528, 1, 0, -65527, 1, 0, -65526, 1, 0, -65525, 1, 0, -65524, 1, 0, -65523, 1, 0, -65522, 1, 0, -65521, 1, 0, 65520, 1, 0, 65521, 1, 0, 65522, 1, 0, 65523, 1, 0, 65524, 1, 0, 65525, 1, 0, 65526, 1, 0, 65527, 1, 0, 65528, 1, 0, 65529, 1, 0, 65530, 1, 0, 65531, 1, 0, 65532, 1, 0, 65533, 1, 0, 65534, 1, 0, 65535, 1, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 131056, 0, 0, 131057, 0, 0, 131058, 0, 0, 131059, 0, 0, 131060, 0, 0, 131061, 0, 0, 131062, 0, 0, 131063, 0, 0, 131064, 0, 0, 131065, 0, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 0, 0, 524272, 0, 0, 524273, 0, 0, 524274, 0, 0, 524275, 0, 0, 524276, 0, 0, 524277, 0, 0, 524278, 0, 0, 524279, 0, 0, 524280, 0, 0, 524281, 0, 0, 524282, 0, 0, 524283, 0, 0, 524284, 0, 0, 524285, 0, 0, 524286, 0, 0, 524287, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0 )
+_sections_unfolded = [ "Cell", "Visibility" ]
+
+[node name="Meta" type="Sprite" parent="nivel" index="1"]
+
+position = Vector2( -135.913, -138.308 )
+texture = ExtResource( 8 )
+
+[node name="Meta2" type="Sprite" parent="nivel" index="2"]
+
+position = Vector2( 55.6826, -138.907 )
+texture = ExtResource( 8 )
+flip_h = true
+_sections_unfolded = [ "Offset" ]
+
+[node name="Meta3" type="Sprite" parent="nivel" index="3"]
+
+position = Vector2( 247.278, -139.506 )
+texture = ExtResource( 8 )
+flip_h = true
+_sections_unfolded = [ "Offset" ]
+
+[node name="Meta4" type="Sprite" parent="nivel" index="4"]
+
+position = Vector2( -327.509, -138.907 )
+texture = ExtResource( 8 )
+flip_h = true
+_sections_unfolded = [ "Offset" ]
+
+[node name="spawn_c" type="Position2D" parent="nivel" index="5"]
+
+editor/display_folded = true
+position = Vector2( -266.438, 105.378 )
+script = ExtResource( 9 )
+
+[node name="spawn_ci" type="Position2D" parent="nivel/spawn_c" index="0"]
+
+position = Vector2( 535.271, 0.598724 )
+
+[node name="spawn_c2" type="Position2D" parent="nivel" index="6"]
+
+editor/display_folded = true
+position = Vector2( -266.438, 86.8169 )
+script = ExtResource( 9 )
+
+[node name="spawn_ci" type="Position2D" parent="nivel/spawn_c2" index="0"]
+
+position = Vector2( 535.271, 0.598724 )
+
+[node name="spawn_c3" type="Position2D" parent="nivel" index="7"]
+
+editor/display_folded = true
+position = Vector2( -266.438, 73.0459 )
+script = ExtResource( 9 )
+
+[node name="spawn_ci" type="Position2D" parent="nivel/spawn_c3" index="0"]
+
+position = Vector2( 535.271, 0.598724 )
+
+[node name="spawn_c4" type="Position2D" parent="nivel" index="8"]
+
+editor/display_folded = true
+position = Vector2( -266.438, 58.0775 )
+script = ExtResource( 9 )
+
+[node name="spawn_ci" type="Position2D" parent="nivel/spawn_c4" index="0"]
+
+position = Vector2( 535.271, 0.598724 )
+
+[node name="spawn_c5" type="Position2D" parent="nivel" index="9"]
+
+editor/display_folded = true
+position = Vector2( -266.438, 41.3129 )
+script = ExtResource( 9 )
+
+[node name="spawn_ci" type="Position2D" parent="nivel/spawn_c5" index="0"]
+
+position = Vector2( 535.271, 0.598724 )
+
+[node name="Player" type="KinematicBody2D" parent="." index="2"]
+
+editor/display_folded = true
+position = Vector2( 7.31514, 120.943 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 10 )
+mov = 16
+
+[node name="Sprite" type="Sprite" parent="Player" index="0"]
+
+texture = ExtResource( 11 )
+hframes = 3
+_sections_unfolded = [ "Animation" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" index="1"]
+
+position = Vector2( 0.255772, -0.34103 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player" index="2"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/idle = SubResource( 2 )
+anims/jump = SubResource( 3 )
+anims/muerte = SubResource( 4 )
+blend_times = [  ]
+
+[connection signal="animation_finished" from="Player/AnimationPlayer" to="Player" method="_on_AnimationPlayer_animation_finished"]
+
+
