@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Car1.tscn" type="PackedScene" id=2]
@@ -6,17 +6,27 @@
 [ext_resource path="res://scenes/Car3.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Car4.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Car5.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Tiles/tile1.tres" type="TileSet" id=7]
-[ext_resource path="res://Sprites/finish.png" type="Texture" id=8]
-[ext_resource path="res://scenes/spawn_c.gd" type="Script" id=9]
-[ext_resource path="res://scenes/Player.gd" type="Script" id=10]
-[ext_resource path="res://Sprites/player.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/player_death.png" type="Texture" id=12]
+[ext_resource path="res://scenes/Tronco.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Meta_F.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Tiles/tile1.tres" type="TileSet" id=9]
+[ext_resource path="res://Sprites/finish.png" type="Texture" id=10]
+[ext_resource path="res://scenes/spawn_c.gd" type="Script" id=11]
+[ext_resource path="res://scenes/spawn_t.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/Agua.gd" type="Script" id=13]
+[ext_resource path="res://scenes/Spawn_Meta.gd" type="Script" id=14]
+[ext_resource path="res://scenes/Player.gd" type="Script" id=15]
+[ext_resource path="res://Sprites/player.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/player_death.png" type="Texture" id=17]
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 256.457, 58.4888 )
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 6.31797, 6.87033 )
+extents = Vector2( 6.31797, 6.10713 )
 
 [sub_resource type="Animation" id=2]
 
@@ -33,7 +43,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 11 ) ]
+"values": [ ExtResource( 16 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:frame")
@@ -50,7 +60,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=3]
 
-length = 0.8
+length = 0.6
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -63,7 +73,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 11 ) ]
+"values": [ ExtResource( 16 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:frame")
@@ -72,7 +82,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.6, 0.7 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 1, 0 ]
@@ -93,7 +103,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 12 ) ]
+"values": [ ExtResource( 17 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:frame")
@@ -108,7 +118,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[node name="main" type="Node" index="0" groups=[
+[node name="main" type="Node" groups=[
 "main",
 ]]
 
@@ -118,6 +128,8 @@ auto2 = ExtResource( 3 )
 auto3 = ExtResource( 4 )
 auto4 = ExtResource( 5 )
 auto5 = ExtResource( 6 )
+tronco = ExtResource( 7 )
+meta = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="0"]
 
@@ -152,7 +164,7 @@ editor_draw_drag_margin = false
 [node name="TileMap" type="TileMap" parent="nivel" index="0"]
 
 mode = 0
-tile_set = ExtResource( 7 )
+tile_set = ExtResource( 9 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -172,100 +184,244 @@ _sections_unfolded = [ "Cell", "Visibility" ]
 
 [node name="Meta" type="Sprite" parent="nivel" index="1"]
 
-position = Vector2( -135.913, -138.308 )
-texture = ExtResource( 8 )
+position = Vector2( -135.913, -90.1014 )
+texture = ExtResource( 10 )
 
 [node name="Meta2" type="Sprite" parent="nivel" index="2"]
 
-position = Vector2( 55.6826, -138.907 )
-texture = ExtResource( 8 )
+position = Vector2( 55.6826, -90.0534 )
+texture = ExtResource( 10 )
 flip_h = true
 _sections_unfolded = [ "Offset" ]
 
 [node name="Meta3" type="Sprite" parent="nivel" index="3"]
 
-position = Vector2( 247.278, -139.506 )
-texture = ExtResource( 8 )
+position = Vector2( 248.572, -90.0053 )
+texture = ExtResource( 10 )
 flip_h = true
 _sections_unfolded = [ "Offset" ]
 
 [node name="Meta4" type="Sprite" parent="nivel" index="4"]
 
-position = Vector2( -327.509, -138.907 )
-texture = ExtResource( 8 )
+position = Vector2( -328.156, -90.7004 )
+texture = ExtResource( 10 )
 flip_h = true
 _sections_unfolded = [ "Offset" ]
 
-[node name="spawn_c" type="Position2D" parent="nivel" index="5"]
+[node name="spawn_c" type="Position2D" parent="nivel" index="5" groups=[
+"spawn_c",
+]]
 
 editor/display_folded = true
-position = Vector2( -266.438, 105.378 )
-script = ExtResource( 9 )
+position = Vector2( -263.526, 105.054 )
+script = ExtResource( 11 )
 
 [node name="spawn_ci" type="Position2D" parent="nivel/spawn_c" index="0"]
 
 position = Vector2( 535.271, 0.598724 )
 
-[node name="spawn_c2" type="Position2D" parent="nivel" index="6"]
+[node name="Timer" type="Timer" parent="nivel/spawn_c" index="1"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[node name="spawn_c2" type="Position2D" parent="nivel" index="6" groups=[
+"spawn_c",
+]]
 
 editor/display_folded = true
-position = Vector2( -266.438, 86.8169 )
-script = ExtResource( 9 )
+position = Vector2( -263.526, 86.4934 )
+script = ExtResource( 11 )
 
 [node name="spawn_ci" type="Position2D" parent="nivel/spawn_c2" index="0"]
 
 position = Vector2( 535.271, 0.598724 )
 
-[node name="spawn_c3" type="Position2D" parent="nivel" index="7"]
+[node name="Timer" type="Timer" parent="nivel/spawn_c2" index="1"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[node name="spawn_c3" type="Position2D" parent="nivel" index="7" groups=[
+"spawn_c",
+]]
 
 editor/display_folded = true
-position = Vector2( -266.438, 73.0459 )
-script = ExtResource( 9 )
+position = Vector2( -263.526, 72.7224 )
+script = ExtResource( 11 )
 
 [node name="spawn_ci" type="Position2D" parent="nivel/spawn_c3" index="0"]
 
 position = Vector2( 535.271, 0.598724 )
 
-[node name="spawn_c4" type="Position2D" parent="nivel" index="8"]
+[node name="Timer" type="Timer" parent="nivel/spawn_c3" index="1"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[node name="spawn_c4" type="Position2D" parent="nivel" index="8" groups=[
+"spawn_c",
+]]
 
 editor/display_folded = true
-position = Vector2( -266.438, 58.0775 )
-script = ExtResource( 9 )
+position = Vector2( -263.526, 57.754 )
+script = ExtResource( 11 )
 
 [node name="spawn_ci" type="Position2D" parent="nivel/spawn_c4" index="0"]
 
 position = Vector2( 535.271, 0.598724 )
 
-[node name="spawn_c5" type="Position2D" parent="nivel" index="9"]
+[node name="Timer" type="Timer" parent="nivel/spawn_c4" index="1"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[node name="spawn_c5" type="Position2D" parent="nivel" index="9" groups=[
+"spawn_c",
+]]
 
 editor/display_folded = true
-position = Vector2( -266.438, 41.3129 )
-script = ExtResource( 9 )
+position = Vector2( -263.526, 40.9894 )
+script = ExtResource( 11 )
 
 [node name="spawn_ci" type="Position2D" parent="nivel/spawn_c5" index="0"]
 
 position = Vector2( 535.271, 0.598724 )
 
-[node name="Player" type="KinematicBody2D" parent="." index="2"]
+[node name="Timer" type="Timer" parent="nivel/spawn_c5" index="1"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[node name="spawn_t" parent="nivel" index="10" instance=ExtResource( 12 )]
+
+position = Vector2( -263.202, 7.87464 )
+dir = 0
+
+[node name="spawn_t2" parent="nivel" index="11" instance=ExtResource( 12 )]
+
+position = Vector2( -263.202, -7.00792 )
+dir = 1
+
+[node name="spawn_t3" parent="nivel" index="12" instance=ExtResource( 12 )]
+
+position = Vector2( -263.202, -23.1846 )
+dir = 0
+
+[node name="spawn_t4" parent="nivel" index="13" instance=ExtResource( 12 )]
+
+position = Vector2( -263.202, -38.7142 )
+dir = 1
+
+[node name="spawn_t5" parent="nivel" index="14" instance=ExtResource( 12 )]
+
+position = Vector2( -263.202, -55.538 )
+dir = 0
+
+[node name="spawn_t6" parent="nivel" index="15" instance=ExtResource( 12 )]
+
+position = Vector2( -263.202, -71.7147 )
+dir = 1
+
+[node name="Agua" type="Area2D" parent="nivel" index="16"]
 
 editor/display_folded = true
-position = Vector2( 7.31514, 120.943 )
+position = Vector2( -4.92756, -3.53839 )
+scale = Vector2( 1.15399, 1.11057 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 13 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="nivel/Agua" index="0"]
+
+position = Vector2( 0.970596, -47.7374 )
+scale = Vector2( 1, 0.928705 )
+shape = SubResource( 5 )
+
+[node name="Spawn_Meta" type="Node" parent="nivel" index="17"]
+
+editor/display_folded = true
+script = ExtResource( 14 )
+
+[node name="1" type="Position2D" parent="nivel/Spawn_Meta" index="0"]
+
+position = Vector2( -232.621, -87.3542 )
+
+[node name="2" type="Position2D" parent="nivel/Spawn_Meta" index="1"]
+
+position = Vector2( -184.738, -87.6777 )
+
+[node name="3" type="Position2D" parent="nivel/Spawn_Meta" index="2"]
+
+position = Vector2( -135.561, -88.3248 )
+
+[node name="4" type="Position2D" parent="nivel/Spawn_Meta" index="3"]
+
+position = Vector2( -87.3542, -88.3248 )
+
+[node name="5" type="Position2D" parent="nivel/Spawn_Meta" index="4"]
+
+position = Vector2( -40.1182, -88.3248 )
+
+[node name="6" type="Position2D" parent="nivel/Spawn_Meta" index="5"]
+
+position = Vector2( 8.08833, -88.0012 )
+
+[node name="7" type="Position2D" parent="nivel/Spawn_Meta" index="6"]
+
+position = Vector2( 55.9714, -88.3248 )
+
+[node name="8" type="Position2D" parent="nivel/Spawn_Meta" index="7"]
+
+position = Vector2( 104.825, -88.3248 )
+
+[node name="9" type="Position2D" parent="nivel/Spawn_Meta" index="8"]
+
+position = Vector2( 152.385, -88.0013 )
+
+[node name="10" type="Position2D" parent="nivel/Spawn_Meta" index="9"]
+
+position = Vector2( 200.268, -88.0013 )
+
+[node name="Player" type="KinematicBody2D" parent="." index="2" groups=[
+"player",
+]]
+
+editor/display_folded = true
+position = Vector2( 7.63869, 136.177 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
-script = ExtResource( 10 )
+script = ExtResource( 15 )
+_sections_unfolded = [ "Transform" ]
 mov = 16
 
 [node name="Sprite" type="Sprite" parent="Player" index="0"]
 
-texture = ExtResource( 11 )
+position = Vector2( 0.153141, 0.510468 )
+texture = ExtResource( 16 )
 hframes = 3
-_sections_unfolded = [ "Animation" ]
+_sections_unfolded = [ "Animation", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" index="1"]
 
-position = Vector2( 0.255772, -0.34103 )
+position = Vector2( 0.408913, 0.169438 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player" index="2"]
@@ -280,6 +436,26 @@ anims/jump = SubResource( 3 )
 anims/muerte = SubResource( 4 )
 blend_times = [  ]
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Player" index="3"]
+
+rect = Rect2( -10, -10, 20, 20 )
+
+[connection signal="timeout" from="nivel/spawn_c/Timer" to="nivel/spawn_c" method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="nivel/spawn_c2/Timer" to="nivel/spawn_c2" method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="nivel/spawn_c3/Timer" to="nivel/spawn_c3" method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="nivel/spawn_c4/Timer" to="nivel/spawn_c4" method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="nivel/spawn_c5/Timer" to="nivel/spawn_c5" method="_on_Timer_timeout"]
+
+[connection signal="body_entered" from="nivel/Agua" to="nivel/Agua" method="_on_Agua_body_entered"]
+
+[connection signal="body_exited" from="nivel/Agua" to="nivel/Agua" method="_on_Agua_body_exited"]
+
 [connection signal="animation_finished" from="Player/AnimationPlayer" to="Player" method="_on_AnimationPlayer_animation_finished"]
+
+[connection signal="screen_exited" from="Player/VisibilityNotifier2D" to="Player" method="_on_VisibilityNotifier2D_screen_exited"]
 
 
